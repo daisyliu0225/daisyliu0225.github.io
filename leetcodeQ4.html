@@ -14,6 +14,10 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
     </head>
     <body>
         <!-- Navigation-->
@@ -35,7 +39,7 @@
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -57,28 +61,80 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
-                        <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>
-                        <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>
-                        <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.</p>
-                        <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.</p>
-                        <h2 class="section-heading">The Final Frontier</h2>
-                        <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-                        <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-                        <blockquote class="blockquote">The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
-                        <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
-                        <h2 class="section-heading">Reaching for the Stars</h2>
-                        <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
-                        <a href="#!"><img class="img-fluid" src="assets/img/post-sample-image.jpg" alt="..." /></a>
-                        <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-                        <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
-                        <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
-                        <p>
-                            Placeholder text by
-                            <a href="http://spaceipsum.com/">Space Ipsum</a>
-                            &middot; Images by
-                            <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>Given two sorted arrays nums1 and nums2 of size m and n respectively, return <b>the median</b> of the two sorted arrays.</p>
+                        <p>The overall run time complexity should be <span style="background-color: #cfcccc;">O(log (m+n)).</span></p>
+                        <p>難度標記：<span style="color: rgb(255, 0, 0);">hard</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>先看一下我們需要處理的array有兩個特性
+                            <ol>
+                                <li>均為sorted(已經幫忙排序好了)</li>
+                                <li>第一個array的size是<span style="background-color: #cfcccc;">m</span>，
+                                    第二個array的size是<span style="background-color: #cfcccc;">n</span>
+                                </li>
+                            </ol>
                         </p>
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>回顧一下所要求的median，median是中位數。</p>
+                        <p>計算有限個數的數據的中位數的方法是：把所有的同類數據按照大小的順序排列。<br>
+                            如果數據的個數是奇數，則中間那個數據就是這群數據的中位數；
+                            如果數據的個數是偶數，則中間那2個數據的算術平均值就是這群數據的中位數。
+                        </p>
+                        <p>計算中位數還有一個隱藏的需求，也就是所有的數據必須要先排序好</p>
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>那就來看一下如何處理這兩個array的排序問題</p>
+                        <p>題目有說到time complexity是O(log (m+n))，所以可以知道最多只能用到一次的sorting。</p>
+                        <p>而且這個sorting方法只能是Merge sort、Heap Sort、Quick Sort的其中一種(均為O(logn))</p>
+                        <p>通常在看到有兩個<b>sorted array</b>必須要併起來的問題的時候，請立刻要想到
+                            <span style="background-color: #cfcccc;">Merge Sort</span>
+                        </p>
+                        <h4 class="section-heading">Step 4</h4>
+                        <p>那如何把兩個array merge起來？</p>
+                        <p>其實很簡單，只要比哪一個比較小，直接塞進去就好了</p>
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>寫完之後很不幸的掛掉了</p>
+                        <p>原因：在merge的時候沒有檢查array是否已經到底了</p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+double findMedianSortedArrays(vector&lt;int&gt;& nums1, vector&lt;int&gt;& nums2) {
+    double median;
+    int median_num = 0;
+    bool even_num = 0;
+    int total = nums1.size()+nums2.size();
+    int num1counter = 0;
+    int num2counter = 0;
+    vector&lt;int&gt; sorted_arr;
+    if(total % 2 == 1){
+        median_num = total/2;
+    }else{
+        median_num = total/2;
+        even_num = 1;
+    }
+    for(int i=0;i&lt;median_num+1;i++){
+            if (num1counter == nums1.size()) {
+            sorted_arr.push_back(nums2[num2counter++]);
+        }
+        // If we've used up all elements in nums2, take from nums1
+        else if (num2counter == nums2.size()) {
+            sorted_arr.push_back(nums1[num1counter++]);
+        }
+        // Otherwise compare
+        else if (nums1[num1counter] &lt;= nums2[num2counter]) {
+            sorted_arr.push_back(nums1[num1counter++]);
+        } else {
+            sorted_arr.push_back(nums2[num2counter++]);
+        }
+    }
+    int sorted = sorted_arr.size();
+    if(even_num == 1){
+        median = (sorted_arr[sorted-1] + sorted_arr[sorted-2])/2.0;
+    }else median = sorted_arr[sorted-1];
+    return median;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q4.jpg" alt="Q4 submission" style="max-width: 100%; height: auto;">
                     </div>
                 </div>
             </div>
@@ -114,7 +170,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2023</div>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
                     </div>
                 </div>
             </div>
