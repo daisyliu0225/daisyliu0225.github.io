@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q12 -- Integer to Roman</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on January 22, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>Roman numerals are formed by appending the conversions of decimal place values from highest to lowest. 
+                            Converting a decimal place value into a Roman numeral has the following rules:</p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        If the value does not start with 4 or 9, select the symbol of the maximal value that can be subtracted from the input, 
+                                        append that symbol to the result, subtract its value, 
+                                        and convert the remainder to a Roman numeral.
+                                    </li>
+                                    <li>
+                                        If the value starts with 4 or 9 use the <b>subtractive form</b> representing one symbol subtracted from the following symbol, 
+                                        for example, 4 is 1 (I) less than 5 (V): IV and 9 is 1 (I) less than 10 (X): IX. 
+                                        Only the following subtractive forms are used: 4 (IV), 9 (IX), 40 (XL), 90 (XC), 400 (CD) and 900 (CM).
+                                    </li>
+                                    <li>
+                                        Only powers of 10 (I, X, C, M) can be appended consecutively at most 3 times to represent multiples of 10. 
+                                        You cannot append 5 (V), 50 (L), or 500 (D) multiple times. 
+                                        If you need to append a symbol 4 times use the <b>subtractive form</b>.
+                                    </li>
+                                </ol>
+                                Given an integer, convert it to a Roman numeral.<br>
+                                The number is ranged from 1 to 3999.
+                            </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>這一題最煩的應該就是4、9、40、90...的部分了</p>
+                        <p>另一個很討厭的事情就是不同位數，個位、十位、百位、千位的表示方法都不一樣</p>
+                        <p>還有5、50、500的問題呢</p>
+                        <p>所以只好把它分不同位數處理，在遇到特殊的狀況的時候把特殊狀況分出去</p>
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>那就想一下如何分case</p>
+                        <p>先從千位數開始，因為題目的最大值只有3999，所以直接就用暴力減了</p>
+                        <p>再來是百位數，百位數因為卡400、900，所以我就將區間分成100~399、400~499、500~899、900~999</p>
+                        <p>因此可以直接用if else分成四種可能，如果大於900，直接push CM進去vector<br>
+                            如果介在500~899，先扣掉500。剩下的數字就留給100~399的區間處理。<br>
+                            如果介在400~499，先扣掉400，直接push XL進去vector<br>
+                            剩下的100~399，就直接用一個while loop處理直到數字&lt;100
+                        </p>
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>剩下的百位個位也是用相同的方式處理，分case，用if else進行討論</p>
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>寫完之後很不幸的掛掉了</p>
+                        <p>原因：我的vector是建character type結果我把string推進去了</p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+string intToRoman(int num) {
+    vector<char> c;
+    while(num>=1000){
+        c.push_back('M');
+        num = num - 1000;
+    }
+
+    if(num >= 900){
+        c.push_back('C');
+        c.push_back('M');
+        num = num - 900;
+    }else{
+        if(num >= 500){
+            c.push_back('D');
+            num = num - 500;
+        }
+    }
+    if(num >= 400){
+        c.push_back('C');
+        c.push_back('D');
+        num = num - 400;
+    }else{
+        while(num >= 100){
+            c.push_back('C');
+            num = num - 100;
+        }
+    }
+
+    if(num >= 90){
+        c.push_back('X');
+        c.push_back('C');
+        num = num - 90;
+    }else{
+        if(num >= 50){
+            c.push_back('L');
+            num = num - 50;
+        }
+    }
+    if(num >= 40){
+        c.push_back('X');
+        c.push_back('L');
+        num = num - 40;
+    }else{
+        while(num >= 10){
+            c.push_back('X');
+            num = num - 10;
+        }
+    }
+
+    if(num >= 9){
+        c.push_back('I');
+        c.push_back('X');
+        num = num - 9;
+    }else{
+        if(num >= 5){
+            c.push_back('V');
+            num = num - 5;
+        }
+    }
+    if(num >= 4){
+        c.push_back('I');
+        c.push_back('V');
+        num = num - 4;
+    }else{
+        while(num >= 1){
+            c.push_back('I');
+            num = num - 1;
+        }
+    }
+
+    string s(c.begin(), c.end());
+    return s;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q12.jpg" alt="Q12 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
