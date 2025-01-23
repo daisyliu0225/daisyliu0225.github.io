@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q32 -- Longest Valid Parantheses</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on January 23, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>
+                            Given a string containing just the characters '(' and ')', return the length of the longest valid (well-formed) parentheses substring.
+                        </p>
+                        <p></p>
+                        <p>難度標記：<span style="color: rgb(255, 0, 0);">hard</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這題我記得我解的方法不太好，有用ChatGPT幫忙</p>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>基本上看到括號題基本用stack準沒錯</p>
+                        <p>所以我們可以用一個stack，然後將左括號push進去，看到右括號的時候pop出來</p>
+                        <p>然後再依此增加最長的長度就好了</p>
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>上面解法很不幸就會有一個問題，就是如果遇到像這類"()(()"時就會掛掉</p>
+                        <p>因為中間有一個左括號卡著，所以最長只能算左邊的pair或右邊的pair，但用上面的方法的話，兩個pair都會被算到</p>
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>所以我就問ChatGPT該如何做，GPT說我們將stack裡面的東西看成是base，也就是longest應該從哪邊算起</p>
+                        <p>今天如果是看到左括號，那我們就先把index推進去，如果有看到右括號的話，就把index pop出來</p>
+                        <p>這樣的話這個stack既可以幫我們看base，也可以幫我們做左括號右括號的push、pop的動作</p>
+                        <p>接著是如果stack裡面空了，代表所有的左括號都有配到一個右括號，我們就把最新的左括號push進去當作新的base</p>
+                        <h4 class="section-heading">Step 4</h4>
+                        <p>那何時update longest？就是在右括號把東西pop出去的時候就看一次，看是原本的longest比較長，還是新的比較長</p>
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>曾經栽過這一題，還是不知道怎麼解，問ChatGPT怎麼處理的</p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+int longestValidParentheses(string s) {
+    int len, longest = 0;
+    stack&lt; int&gt;  cur_top;
+    len = s.length();
+    cur_top.push(-1);
+    for(int i=0;i&lt; len;i++){
+        if(s[i] == '(') cur_top.push(i);
+        else if(s[i] == ')' && cur_top.size() != 0){
+            cur_top.pop();
+            if(cur_top.size() == 0) cur_top.push(i);
+            else longest = max(longest, abs(cur_top.top()-i));
+        }
+    }
+    return longest;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q32.jpg" alt="Q12 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
