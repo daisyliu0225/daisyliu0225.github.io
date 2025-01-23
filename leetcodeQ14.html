@@ -14,6 +14,10 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
     </head>
     <body>
         <!-- Navigation-->
@@ -35,30 +39,136 @@
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="page-heading">
-                            <h1>About Me</h1>
-                            <span class="subheading">This is what I do.</span>
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q14 -- Longest Common Prefix</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on January 23, 2025
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
-        <!-- Main Content-->
-        <main class="mb-4">
+        <!-- Post Content-->
+        <article class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>
+                            Write a function to find the longest common prefix string amongst an array of strings.
+                            If there is no common prefix, return an empty string "".
+                        </p>
                         <p></p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+                        <p>難度標記：<span style="color: rgba(34, 255, 0, 0.788);">easy</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>這一題最煩的應該就是4、9、40、90...的部分了</p>
+                        <p>另一個很討厭的事情就是不同位數，個位、十位、百位、千位的表示方法都不一樣</p>
+                        <p>還有5、50、500的問題呢</p>
+                        <p>所以只好把它分不同位數處理，在遇到特殊的狀況的時候把特殊狀況分出去</p>
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>那就想一下如何分case</p>
+                        <p>先從千位數開始，因為題目的最大值只有3999，所以直接就用暴力減了</p>
+                        <p>再來是百位數，百位數因為卡400、900，所以我就將區間分成100~399、400~499、500~899、900~999</p>
+                        <p>因此可以直接用if else分成四種可能，如果大於900，直接push CM進去vector<br>
+                            如果介在500~899，先扣掉500。剩下的數字就留給100~399的區間處理。<br>
+                            如果介在400~499，先扣掉400，直接push XL進去vector<br>
+                            剩下的100~399，就直接用一個while loop處理直到數字&lt;100
+                        </p>
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>剩下的百位個位也是用相同的方式處理，分case，用if else進行討論</p>
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>一次pass</p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+string intToRoman(int num) {
+    vector<char> c;
+    while(num>=1000){
+        c.push_back('M');
+        num = num - 1000;
+    }
+
+    if(num >= 900){
+        c.push_back('C');
+        c.push_back('M');
+        num = num - 900;
+    }else{
+        if(num >= 500){
+            c.push_back('D');
+            num = num - 500;
+        }
+    }
+    if(num >= 400){
+        c.push_back('C');
+        c.push_back('D');
+        num = num - 400;
+    }else{
+        while(num >= 100){
+            c.push_back('C');
+            num = num - 100;
+        }
+    }
+
+    if(num >= 90){
+        c.push_back('X');
+        c.push_back('C');
+        num = num - 90;
+    }else{
+        if(num >= 50){
+            c.push_back('L');
+            num = num - 50;
+        }
+    }
+    if(num >= 40){
+        c.push_back('X');
+        c.push_back('L');
+        num = num - 40;
+    }else{
+        while(num >= 10){
+            c.push_back('X');
+            num = num - 10;
+        }
+    }
+
+    if(num >= 9){
+        c.push_back('I');
+        c.push_back('X');
+        num = num - 9;
+    }else{
+        if(num >= 5){
+            c.push_back('V');
+            num = num - 5;
+        }
+    }
+    if(num >= 4){
+        c.push_back('I');
+        c.push_back('V');
+        num = num - 4;
+    }else{
+        while(num >= 1){
+            c.push_back('I');
+            num = num - 1;
+        }
+    }
+
+    string s(c.begin(), c.end());
+    return s;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q12.jpg" alt="Q12 submission" style="max-width: 100%; height: auto;">
                     </div>
                 </div>
             </div>
-        </main>
+        </article>
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">
