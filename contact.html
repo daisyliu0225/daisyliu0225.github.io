@@ -120,7 +120,7 @@
     <!-- Core theme JS -->
     <script src="js/scripts.js"></script>
     <!-- EmailJS integration -->
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         // Initialize EmailJS
         (function () {
@@ -148,7 +148,7 @@
             console.log("Form Data: ", formData);
 
             // Send form data using EmailJS
-            emailjs.send("service_u6wvdee", "template_p68w66c", formData)
+            emailjs.send("service_p5red7l", "template_p68w66c", formData)
                 .then(function (response) {
                     alert("Message sent successfully!");
                     console.log("SUCCESS", response.status, response.text);
