@@ -97,10 +97,13 @@
     <script>
         async function loadPosts() {
             try {
+                const container = document.querySelector('.container .row .col-md-10.col-lg-8.col-xl-7');
+                console.log('Target container:', container); // Debug log
+
                 const response = await fetch('posts.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
                 const posts = await response.json();
-                const container = document.querySelector('.container .row .col-md-10.col-lg-8.col-xl-7');
                 posts.forEach(post => {
                     const postHTML = `
                         <div class="post-preview">
@@ -118,10 +121,11 @@
                 });
             } catch (error) {
                 console.error('Error loading posts:', error);
-                const container = document.querySelector('.col-md-10.col-lg-8.col-xl-7');
+                const container = document.querySelector('.container .row .col-md-10.col-lg-8.col-xl-7');
                 container.innerHTML = '<p class="text-danger">Failed to load posts. Please try again later.</p>';
             }
         }
+
 
         document.addEventListener('DOMContentLoaded', loadPosts);
     </script>
