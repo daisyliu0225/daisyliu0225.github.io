@@ -94,39 +94,36 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
     <script>
-       async function loadPosts() {
-        try {
-            const response = await fetch('posts.json'); // Ensure this path is correct
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            
-            const posts = await response.json();
-            const container = document.querySelector('.col-md-10.col-lg-8.col-xl-7'); // Target the correct section
-
-            posts.forEach(post => {
-                const postHTML = `
-                    <div class="post-preview">
-                        <a href="${post.link}">
-                            <h2 class="post-title">${post.title}</h2>
-                            <h3 class="post-subtitle">${post.subtitle}</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by <a href="#!">${post.author}</a> on ${post.date}
-                        </p>
-                    </div>
-                    <hr class="my-4" />
-                `;
-                container.innerHTML += postHTML; // Append to the correct container
-            });
-        } catch (error) {
-            console.error('Error loading posts:', error);
-            const container = document.querySelector('.col-md-10.col-lg-8.col-xl-7');
-            container.innerHTML = '<p class="text-danger">Failed to load posts. Please try again later.</p>';
+        async function loadPosts() {
+            try {
+                const response = await fetch('posts.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const posts = await response.json();
+                const container = document.querySelector('.container .row .col-md-10.col-lg-8.col-xl-7');
+                posts.forEach(post => {
+                    const postHTML = `
+                        <div class="post-preview">
+                            <a href="${post.link}">
+                                <h2 class="post-title">${post.title}</h2>
+                                <h3 class="post-subtitle">${post.subtitle}</h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by <a href="#!">${post.author}</a> on ${post.date}
+                            </p>
+                        </div>
+                        <hr class="my-4" />
+                    `;
+                    container.innerHTML += postHTML;
+                });
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                const container = document.querySelector('.col-md-10.col-lg-8.col-xl-7');
+                container.innerHTML = '<p class="text-danger">Failed to load posts. Please try again later.</p>';
+            }
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', loadPosts);
+        document.addEventListener('DOMContentLoaded', loadPosts);
     </script>
 </body>
 </html>
