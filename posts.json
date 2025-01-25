@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q2 -- Add Two Numbers",
+        "link": "leetcodeQ2.html",
+        "date": "January 25, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q32 -- Longest Valid Parenthesis",
         "link": "leetcodeQ32.html",
         "date": "January 23, 2025",

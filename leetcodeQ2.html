@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q2 -- Add Two Numbers</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on January 25, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>You are given two <b>non-empty</b> linked lists representing two non-negative integers. 
+                            The digits are stored in <b>reverse order</b>, and each of their nodes contains a single digit. 
+                            Add the two numbers and return the sum as a linked list.<br>
+                            You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+                        </p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    The number of nodes in each linked list is in the range [1, 100].
+                                </li>
+                                <li>
+                                    0 &lt; = Node.val &lt; = 9
+                                </li>
+                                <li>
+                                    It is guaranteed that the list represents a number that does not have leading zeros.
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題有參考別人的答案<br>
+                            其實看到linked list的時候我就有想到要把每一個node相加起來，並且算carry。<br>
+                            但奈何方法太笨，效率太低，所以debug了幾次code之後就看一下別人如何解
+                        </p>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>首先，先審題，了解題目要什麼是我們必須知道的。題目要求要給一個ListNode*，在上面就有給一點點提示</p>
+                        <pre><code class="language-cpp">
+/*
+ Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+*/
+                        </code></pre>
+                        依照上面的提示我們就可以知道，ListNode裡面有一個變數叫val，還有一個變數叫next，是一個指到ListNode的pointer<br><br>
+                        還有三個函數，主要就是幫ListNode的Node進行初始化<br><br>
+                        第一個函數是創立一個新的Node，裡面的val是0，然後下一個Node是nullptr，也就是沒有接到任何node<br><br>
+                        第二個函數是創立一個新的Node，裡面的val是x，下一個Node是nullptr<br><br>
+                        第三個函數是創立一個新的Node，裡面的val是x，但下一個Node有被決定<br><br>
+                        在建立這些Node的時候其實也可以都不指定，因為之後可以用(nodename)->val / (nodename)->next 進行指定<br><br>
+                        建立Node的時候要記得這樣做：ListNode* (nodename) = new ListNode();，不然程式會不認
+
+                        <h4 class="section-heading">Step 2</h4>
+                        接著就是進行node之間的相加了，做法自然就是把兩個linked list loop過一次就可以知道相加之後的和<br><br>
+                        首先我們先創造一個dummyNode，至少讓程式知道要從哪裡開始跑。<br><br>
+                        那問題就來了，在程式執行的時候我們並不知道哪一個linked list比較長，所以我就想說只有在兩個有下一個(->next != nullptr)的時候才做while，剩下我就分case處理<br><br>
+                        別人高明的地方就是這個！！他全部都用while處理，只是while終止條件是當我沒有要執行任何東西的時候才終止(l1 != nullptr || l2 != nullptr || carry != 0)<br><br>
+                        那如果今天某一個是nullptr但另一個不是該如何處理呢？那就是直接把nullptr的代表值設成0就好了。這個方法真的很聰明。
+
+                        <h4 class="section-heading">Step 3</h4>
+                        後面就是相加之後的一些處理了，想法很簡單。<br><br>
+                        如果今天兩者相加大於等於10的話，那就是有carry。carry就要被設成1。<br><br>
+                        至於carry會不會超過1，其實我認為不會，原因是當兩個node都剛好是9，而且carry是1的時候，值也只有19，所以可以知道carry最大只有1。<br><br>
+
+                        <h4 class="section-heading">Step 4</h4>
+                        最後的最後，還要處理下一個是不是nullptr，那判斷方法就是如果現在的ptr是nullptr的話，那就讓它繼續是nullptr。<br><br>
+                        如果不是的話，那就是讓現在的node跳到下一個。
+
+                        <h4 class="section-heading">Step 5</h4>
+                        來到回傳node的地方了。因為dummyNode裡面是空的，只有幫我們指到第一個node是誰，所以回傳dummyNode的下一個node就好了<br>
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>其實我做while判斷的跳出結果不用一直鎖l1->next != nullptr，只要讓l1 != nullptr就可以了<br>
+                            有遇到其他狀況我再處理
+                        </p>
+                        <p>幹嘛執著在一定要把第一個node傳回去，其實只要有linked list，不管傳第幾個node，只要有正確結果就好了<br>
+                            換言之，我可以設一個dummyNode然後再傳回dummyNode的下一個就好
+                        </p>
+                        <p>
+                            一個小筆記：<br>
+                            if(...) a1 = (condition 1) else a1 = (condition 2) 可以簡化成<br>
+                            a1 = (...) ? (condition 1) : (condition 2)
+                        </p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    ListNode* dummyHead = new ListNode(0);
+    ListNode* curNode = dummyHead;
+    int carry = 0;
+
+    while(l1 != nullptr || l2 != nullptr || carry != 0){
+        int val1 = (l1 != nullptr) ? l1->val : 0;
+        int val2 = (l2 != nullptr) ? l2->val : 0;
+        int sum = val1 + val2 + carry;
+        int digit = sum % 10;
+        carry = sum / 10;
+
+        ListNode* newNode = new ListNode(digit);
+        curNode->next = newNode;
+        curNode = curNode->next;
+
+        l1 = (l1 != nullptr) ? l1->next: nullptr;
+        l2 = (l2 != nullptr) ? l2->next: nullptr;
+    }
+    return dummyHead->next;
+    }
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q2.jpg" alt="Q12 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
