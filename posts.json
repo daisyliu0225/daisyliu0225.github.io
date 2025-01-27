@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q3 -- Longest Substring Without Repeating Characters",
+        "link": "leetcodeQ3.html",
+        "date": "January 27, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q2 -- Add Two Numbers",
         "link": "leetcodeQ2.html",
         "date": "January 25, 2025",
