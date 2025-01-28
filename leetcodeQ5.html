@@ -95,8 +95,14 @@
                         <p>如果檢查起來不一樣的話，就離開目前偶數的檢查(break while)，重新進行for loop</p>
 
 
+                        <h4 class="section-heading">Step 4</h4>
+                        <p>回傳找到的sequence，這一題使用回傳函數是.substr的函數。</p>
+                        <p>substr函數的使用方法如下：函數有兩個參數，第一個是substring的start，傳入值使用的是在第一步裡面建立的start。
+                            第二個是從start之後要擷取的substring長度，傳入值使用的是第一步裡面建立並會隨著函數更新的longest，也就是我們找到的字串長度</p>
+                        <p>利用.substr回傳之後就完成了</p>
+                        
                         <h2 class="section-heading">Debug/遇到的問題</h2>
-                        <p>奇數與偶數長度沒有考慮到、s.split的使用(s是string)、字串長度的考慮有問題</p>
+                        <p>奇數與偶數長度沒有考慮到、s.substr的使用(s是string)、字串長度的考慮有問題</p>
                         <h2 class="section-heading">Whole code</h2>
                         <pre><code class="language-cpp">
 string longestPalindrome(string s) {
