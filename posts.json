@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q6 -- Zigzag Conversion",
+        "link": "leetcodeQ6.html",
+        "date": "January 29, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q5 -- Longest Palindromic Substring Without Repeating Characters",
         "link": "leetcodeQ5.html",
         "date": "January 28, 2025",
