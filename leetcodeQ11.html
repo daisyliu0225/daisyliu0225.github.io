@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q11 -- Container With Most Water</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on January 30, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>You are given an integer array height of length n. 
+                            There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+                        </p>
+                        <p>
+                            Find two lines that together with the x-axis form a container, 
+                            such that the container contains the most water.
+                        </p>
+                        <p>
+                            Return the maximum amount of water a container can store.
+                        </p>
+                        <p><b>You should not slant the container.</b></p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    n == height.length
+                                </li>
+                                <li>
+                                    2 &lt;= n &lt; 10^5;
+                                </li>
+                                <li>
+                                    0 &lt;= height[i] &lt; 10^4;
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>有看一下別人的解答。原因：我沒有想到要如何尋找兩邊的條件，讓最終的值為最大值</p>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>這一題的解答比我想像中簡單</p>
+                        <p>提示裡面已經寫可以用兩個指標作為左、右標記來尋找最大值，那要如何利用兩個標記尋找</p>
+                        <p>其實就是比左右標記的大小，今天如果右邊比較大，就移動左邊，如果左邊比較小，就移動右邊</p>
+                        <p>移動完標記之後算出矩形的面積，面積以左右標記的距離*min(左標記, 右標記)計算，如果今天結果比目前計算的最大面積大的話，最大面積就進行更新</p>
+                        <p>最後回傳最大面積即可</p>
+
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>剛開始就是沒有想到尋找兩邊的條件，後面程式不小心搞錯左右移動的條件，但有成功自己克服</p>
+
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+int maxArea(vector&lt;int&gt;& height) {
+    int left = 0, right = height.size()-1;
+    int max_area = 0;
+    while(left != right){
+        int cur_area = abs(left-right)*min(height[left], height[right]);
+        if(cur_area > max_area) max_area = cur_area;
+        if(height[left] > height[right]) right--;
+        else left++;
+    }
+    return max_area;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q11.jpg" alt="Q11 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
