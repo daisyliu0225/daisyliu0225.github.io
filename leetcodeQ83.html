@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q83 -- Remove Duplicates From Sorted List</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on January 30, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>
+                            Given the head of a sorted linked list, 
+                            delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+                        </p>
+                        <p>
+                            Constraints:
+                            <ol>
+                                <li>
+                                    The number of nodes in the list is in the range [0, 300].
+                                </li>
+                                <li>
+                                    -100 &lt;= Node.val &lt;= 100
+                                </li>
+                                <li>
+                                    The list is guaranteed to be <b>sorted</b> in ascending order.
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgba(34, 255, 0, 0.788);">easy</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>這題我的想法很簡單，我設一個變數叫current val，如果今天node val跟current val一樣的話，就要把這個node刪掉</p>
+                        <p>會有這樣的想法是因為題目有有說linked list已經是sorted了，所以如果current val有出現過，
+                            那就代表前面的node一定是current val，現在這個node一定是duplicate，所以現在的node要刪掉。</p>
+                        <p>如果node val跟current val不一樣的話，代表這一個node val第一次出現，同時也進到新的node val的區域裡，所以把current val改成新的node val</p>
+                        
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>至於刪掉node的方法如何處理，我的想法是有一個ptr指著前一個node(我叫它curNode)，還有一個ptr叫head，紀錄現在走到哪一個node</p>
+                        <p>會這樣做是因為由題目的structure可以知道這是一個單項的linked list，所以過了前一個node就回不來了，
+                            但刪除node時需要前一個node跟後一個node進行連接，不然會runtime error，所以就設置一個prevNode來記錄上一個node。
+                            至於下一個node只要用head->next就可以處理了。
+                        </p>
+                        <p>流程就是：把前一個node連接到下一個node(head->next)->刪除head->把head指到前一個node的下一個</p>
+                        
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>至於return的東西，我們在程式剛開始的時候直接設一個指標叫ret，指到剛傳進來的head，最後return ret就好了</p>
+                        
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>剛開始runtime error，結果發現我constraint沒看，node值在-100~100間，修好就過了</p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+ListNode* deleteDuplicates(ListNode* head) {
+    int cur_num = 101;
+    ListNode* prevNode = head;
+    ListNode* ret = head;
+    while(head != nullptr){
+        if(head->val != cur_num){
+            cur_num = head->val;
+            prevNode = head;
+            head = head->next;
+        }
+        else{
+            prevNode->next = head->next;
+            delete head;
+            head = prevNode->next;
+        }
+    }
+    return ret;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q83.jpg" alt="Q83 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
