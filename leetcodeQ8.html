@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q8 -- String to Integer (atoi)</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 1, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>Implement the myAtoi(string s) function, 
+                            which converts a string to a 32-bit signed integer.
+                        </p>
+                        <p>The algorithm for myAtoi(string s) is as follows:</p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    <b>Whitespace</b>: Ignore any leading whitespace (" ").
+                                </li>
+                                <li>
+                                    <b>Signedness</b>: Determine the sign by checking if the next character is '-' or '+', 
+                                    assuming positivity if neither present.
+                                </li>
+                                <li>
+                                    <b>Conversion</b>: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. 
+                                    If no digits were read, then the result is 0.
+                                </li>
+                                <li>
+                                    Rounding: If the integer is out of the 32-bit signed integer range [-2^31, 2^31 - 1], 
+                                    then round the integer to remain in the range. 
+                                    Specifically, integers less than -231 should be rounded to -2^31, 
+                                    and integers greater than 2^31 - 1 should be rounded to 2^31 - 1.
+                                </li>
+                            </ol>
+                        </p>
+                        <p>Return the integer as the final result.</p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    0 &lt; = s.length &lt; = 200
+                                </li>
+                                <li>
+                                    s consists of English letters (lower-case and upper-case), 
+                                    digits (0-9), ' ', '+', '-', and '.'.
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題有參考Leetcode解答上面解法，原因是當初寫的東西太複雜，用了太多if跟else處理</p>
+                        
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>這一題主要的解法就是把題目條件一一列出來，並依照重要性排列，最後得出一個結果</p>
+                        <p>在題目的演算法中，第一個要處理的是空白，再來是正負號，接著是前面如果有0的話就要一直跳過
+                            ，如果有讀到非0就會丟出去。最後如果超過integer的範圍，就要把答案卡在最大及最小的integer</p>
+                        
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>所以就跟著題目要求的列出code，首先要處理前面的空白，所以就設定一個i變數，代表目前掃到的字串位置</p>
+                        <p>如果字串位置是空白，那就一直往前掃，直到不是空白為止</p>
+
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>接著處理正負號，掃完空白之後的正負號才是答案的正負號，所以就檢查如果是正的，那sign變數就是+1，如果是負的，sign變數就是-1</p>
+
+                        <h4 class="section-heading">Step 4</h4>
+                        <p>處理完正負號之後就看接下來的數字是不是0~9，作法就是將ans*10+s[i](目前的值)
+                            如果前面都是0也沒關係，因為ans = 0，且s[i]為0，得出來的答案也會是0
+                        </p>
+                        <p>如果不是0~9的話，就把答案直接丟回去了，記得要把答案*sign</p>
+                        <p>還要考慮到有可能掃到string的末端也沒有非0~9的digit，所以要在迴圈外面再加一個return</p>
+                        
+                        <h4 class="section-heading">Step 5</h4>
+                        <p>至於rounding如何處理也是很簡單，只要在檢查ans的時候發現比INT_MAX或INT_MIN大或小的話，就round ans。
+                            這也是為什麼一開始的ans要開long long int的原因。
+                        </p>
+                        <h2 class="section-heading">Debug/遇到的問題</h2>
+                        <p>不要把例外case都列出來，有時候要想一下是否正常才是所謂的例外(有點像排列組合的反扣法)</p>
+
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+int myAtoi(string s) {
+    int i = 0;
+    int sign = 1;
+    long long int ans = 0;
+    while(i &lt; s.length() && s[i] == ' ')
+        i++;
+    if(s[i] == '-'){
+        sign = -1;
+        i++;
+    }
+    else if(s[i] == '+') i++;
+    while(i&lt;s.length()){
+        if(s[i]>='0' && s[i]&lt;='9'){
+            ans = ans * 10 +(s[i]-'0');
+            if(ans > INT_MAX && sign == -1) return INT_MIN;
+            else if(ans > INT_MAX && sign == 1) return INT_MAX;
+            i++;
+        }else return ans * sign;
+    }
+    return (ans*sign);
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q8.jpg" alt="Q8 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

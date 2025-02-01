@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q8 -- String to Integer (atoi)",
+        "link": "leetcodeQ8.html",
+        "date": "February 1, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q83 -- Remove Duplicates from Sorted List",
         "link": "leetcodeQ83.html",
         "date": "January 30, 2025",
