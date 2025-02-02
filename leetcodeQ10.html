@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q10 -- Regular Expression Matching</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 2, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where:</p>
+                        <p>
+                            <ol>
+                                <li>'.' Matches any single character.​​​​</li>
+                                <li>'*' Matches zero or more of the preceding element.</li>
+                            </ol>
+                        </p>
+                        <p>The matching should cover the <b>entire</b> input string (not partial).</p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    1 &lt;= s.length &lt;= 20
+                                </li>
+                                <li>
+                                    1 &lt;= p.length &lt;= 20
+                                </li>
+                                <li>
+                                    s contains only lowercase English letters.
+                                </li>
+                                <li>
+                                    p contains only lowercase English letters, '.', and '*'.
+                                </li>
+                                <li>
+                                    It is guaranteed for each appearence of the character '*', 
+                                    there will be a previous valid character to match.
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 0, 0);">hard</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>原來想說用分case處理，沒想到這一題的解法是用DP，看來有關字串matching的題型多數可能都用DP</p>
+                        <p>這題好像是一種經典題目叫regex match</p>
+                        <p>這題答案參考ChatGPT</p>
+
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>首先先建立一個(m+1)*(n+1)的陣列，m代表的是字串p的長度，n代表的是字串s的長度</p>
+                        <p>會建立m+1*n+1是因為下面的for loop會掃到m與n，做這個是以防overflow的發生</p>
+                        <p>先將所有的字串內容建立為false，並把[0][0]的格子設定為true，原因是空字串跟空字串是match的</p>
+
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>接下來要處理一些p可能的字串，像是a*b*c的組合，這些組合特別地方在於它們可以match到空字串上(i=0的狀況)</p>
+                        <p>所以將p字串掃過一遍，如果p有'*'字元的話，那下一個字元的結果就會跟'*'的前一個字元的狀況相同</p>
+                        
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>再來就是處理正常字串的狀況了，正常字串的狀況分為三種狀況，也就是字元相同、字元為'.'、字元為'*'三種狀況</p>
+                        <p>要先注意的是'.'跟字元相同的情況會被歸在同一類，原因是因為都是可以看成是同一個字元match的狀況，
+                            所以直接將前一個結果([i-1][j-1])搬過來現在([i][j])使用即可</p>
+                        <p>再來處理字元為'*'的狀況，跟第二步相同，直接把前面兩個字元的結果搬過來使用就好了(i不變, j-2)</p>
+                        <p>如果剛剛好前面是'.'或字元相同的話，可以再向前一格([i-1][j])，並確認前面是否有match的狀況。</p>
+
+                        <h4 class="section-heading">Step 4</h4>
+                        <p>將最後我們得到的結果回傳([m][n])，就完成了</p>
+                        
+                        <h2 class="section-heading">Debug/遇到的問題/GPT的建議</h2>
+                        GPT表示我的方法不行，原因是因為在'*'的時候，我會直接返回true，
+                        但題目的要求是希望可以猜到底是1個字元、沒有字元等等，我這樣做太斬釘截鐵了
+                        =>為了解決這個問題(尤其是'*')，使用DP會是一個比較好的選擇
+
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+int m = s.size(), n = p.size();
+    // dp[i][j] is true if s[0...i-1] matches p[0...j-1]
+    vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
+
+    dp[0][0] = true; // Empty string matches empty pattern
+
+    // Deals with patterns like a*, a*b*, a*b*c* that can match an empty string.
+    for (int j = 2; j &lt;= n; j++) {
+        if (p[j - 1] == '*')
+            dp[0][j] = dp[0][j - 2];
+    }
+
+    for (int i = 1; i &lt;= m; i++) {
+        for (int j = 1; j &lt;= n; j++) {
+            if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {
+                // Current characters match, inherit the result from the previous state.
+                dp[i][j] = dp[i - 1][j - 1];
+            } else if (p[j - 1] == '*') {
+                // '*' can count as 0 occurrence of the element before '*'
+                dp[i][j] = dp[i][j - 2];
+                // If the element before '*' matches the current character (or is '.'),
+                // we can also "consume" one character from s.
+                if (p[j - 2] == s[i - 1] || p[j - 2] == '.')
+                    dp[i][j] = dp[i][j] || dp[i - 1][j];
+            }
+            // else: dp[i][j] remains false.
+        }
+    }
+
+    return dp[m][n];
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q10.jpg" alt="Q10 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
