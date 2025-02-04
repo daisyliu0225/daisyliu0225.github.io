@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q1 -- Two Sum</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 4, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>
+                            Given an array of integers nums and an integer target, 
+                            return indices of the two numbers such that they add up to target.
+                        </p>
+                        <p>
+                            You may assume that each input would have <b>exactly one solution</b>, 
+                            and you may not use the same element twice.
+                        </p>
+                        <p>You can return the answer in any order.</p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    2 &lt;= nums.length &lt;= 10^4
+                                </li>
+                                <li>
+                                    -10^9 &lt;= nums[i] &lt;= 10^9
+                                </li>
+                                <li>
+                                    -10^9 &lt;= target &lt;= 10^9
+                                </li>
+                                <li>
+                                    only one valid answer exists
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgba(34, 255, 0, 0.788);">easy</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題原本用暴力解，時間複雜度會是n^2，後來看了別人的解答用hash table，以下紀錄hash table的作法</p>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>Hash Table是什麼已經寫在下面了。</p>
+                        <p>這一題使用hash table的想法是將每一個數字所對應的target sum和記錄下來</p>
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>首先先建立一個hash table並把vector中的東西loop一遍，
+                            在loop的時候，我們同時尋找當前的element的complement，也就是target-element的數字有沒有在map裡面
+                        </p>
+                        <p>
+                            會有兩種狀況，沒有或有：如果沒有的話，那就先把hash table裡面的那一個element的數字設成i，
+                            如果有的話，那就是將那一個element的complement代表的數字跟現在element一同回傳
+                        </p>
+                        <p>
+                            因為題目已經確認只有一個解了，但如果可以有多解的話。回傳的部分可以先用一個vector存著，
+                            等全部loop過再回傳。
+                        </p>
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>如果都沒有找到的話，回傳空集合</p>
+                        
+                        <h2 class="section-heading">Debug/遇到的問題/觀念紀錄</h2>
+                        <h4 class="section-heading">Hash table是啥</h4>
+                        <p>Hash Table是一個data structure，它提供資料快速的查找、增添以及刪除。
+                            可以達成如此高的效率是因為它使用的是key-value pair的技術。
+                        </p>
+                        <p>Hash table的特性
+                            <ol>
+                                <li>
+                                    Key value：每一個value都有特殊的key對應
+                                </li>
+                                <li>
+                                    Hash Function：每一個數學方程都會將一個key對應到一個index，
+                                    這個function必須將key平均分配不然會有collision
+                                </li>
+                                <li>
+                                    Fast Lookup(平均是O(1)complexity)：
+                                    因為hash function的關係，找到每一個key只需要O(1)的複雜度
+                                </li>
+                            </ol>
+                        </p>
+                        <p>
+                            一個hash table的例子：<br>
+                            <img src="./assets/pics/Q1_hash_table.jpg" alt="Q1 submission" style="max-width: 100%; height: auto;">
+                            程式設計師可以自己設計一個hash function，像這樣：
+                            <pre><code class="language-cpp">
+int hashFunction(string key, int tableSize) {
+    int hash = 0;
+    for (char ch : key) {
+        hash += ch;  // Simple summing of ASCII values
+    }
+    return hash % tableSize;  // Ensuring the index stays within bounds
+}                                
+                            </code></pre>
+                            也可以交給C++裡面的unordered map進行代管，由C++內部系統進行設計
+                            <pre><code class="language-cpp">
+unordered_map<string, int> ageMap;
+ageMap["Alice"] = 25;
+ageMap["Bob"] = 30;
+ageMap["Charlie"] = 22;
+
+cout &lt;&lt; ageMap["Bob"];  // Output: 30
+
+                            </code></pre>
+                        </p>
+                        <p>&#x2705;使用時機
+                            <ol>
+                                <li>
+                                    當你需要快速查找東西的時候(O(1)complexity)
+                                </li>
+                                <li>
+                                    當你需要快速加入或刪除東西的時候
+                                </li>
+                                <li>
+                                    當你確定每一個value都有其對應的unique key的時候
+                                </li>
+                            </ol>
+                        </p>
+                        <p>&#x274C;不建議使用時機<br>
+                            如果data必須要sort之後才可以進行處理
+                        </p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> numMap;
+    int n = nums.size();
+
+    for(int i=0;i&lt;n;i++){
+        int complement = target - nums[i];
+        if(numMap.count(complement)){
+            return {numMap[complement], i};
+        }
+        numMap[nums[i]] = i;
+    }
+    return {};
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q1.jpg" alt="Q1 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

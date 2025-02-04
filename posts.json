@@ -1,11 +1,19 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q1 -- Two Sums",
+        "link": "leetcodeQ1.html",
+        "date": "February 4, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q10 -- Regular Expression Matching",
         "link": "leetcodeQ10.html",
         "date": "February 2, 2025",
         "author": "daisyliu0225"
-    },{
+    },
+    {
         "title": "Leetcode解題筆記",
         "subtitle": "Q8 -- String to Integer (atoi)",
         "link": "leetcodeQ8.html",
