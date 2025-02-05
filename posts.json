@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q125 -- Valid Palindrome",
+        "link": "leetcodeQ125.html",
+        "date": "February 5, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q1 -- Two Sums",
         "link": "leetcodeQ1.html",
         "date": "February 4, 2025",
