@@ -1,5 +1,12 @@
 [
     {
+        "title": "Leetcode解題筆記",
+        "subtitle": "Q21 -- Merge Two Sorted Lists",
+        "link": "leetcodeQ21.html",
+        "date": "February 6, 2025",
+        "author": "daisyliu0225"
+    },
+    {
         "title": "Google面試準備",
         "subtitle": "Interview tips from Software Engineers",
         "link": "./google/google_interview_tips.html",
