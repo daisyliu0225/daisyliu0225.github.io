@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q100 -- Same Tree",
+        "link": "./leetcode/leetcodeQ100.html",
+        "date": "February 6, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q21 -- Merge Two Sorted Lists",
         "link": "leetcodeQ21.html",
         "date": "February 6, 2025",
