@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q371 -- Sum of 2 Integers",
+        "link": "./leetcode/leetcodeQ371.html",
+        "date": "February 8, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q191 -- Number of 1 bits",
         "link": "./leetcode/leetcodeQ191.html",
         "date": "February 7, 2025",

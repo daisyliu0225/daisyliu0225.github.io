@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q371 -- Sum of 2 Integers</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 8, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>Given two integers a and b, 
+                            return the sum of the two integers without using the operators + and -.
+                        </p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    -1000 &lt; = Node.val &lt; = 1000
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題有參考別人的答案</p>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>Bitwise operators的定義已經寫在下面了。這一題有用到的bitwise operators有and, xor跟left shift.</p>
+                        <p>這一題要做的事情是試圖不要用+跟-來處理相加的問題。所以我們先從兩個正數的相加來開始處理。</p>
+                        <p>有些人可能會問，那這樣負數怎麼辦(題目constraint有到負的)，這就不用擔心了，因為負數在電腦裡面是用2's complement的方式儲存的。</p>
+                        <p>2's complement的設計就保證負數的運作模式跟正數的運作模式會相同了。所以我們只要觀察正數怎麼做，負數就會是相同的方法了。</p>
+
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>所以我們就列出數字協助觀察，比方說3和5好了，那3在binary是11，5在binary是101，相加應該要得到8，也就是1000</p>
+                        <p>先看sum要怎麼處理，可以觀察到如果是1+1，那sum就是0，如果是1+0，sum就是1...<br>
+                            所以整理下來會發現sum使用的bitwise operator就是xor。
+                        </p>
+                        <p>接下來要處理的是carry，可以觀察到如果今天是1+1，carry是1，其他都是0，所以可以知道carry要用and代表</p>
+                        <p>再來，我們把carry right shift，原因是因為carry是進位的數字，所以要往左移一格，才會到正確要"carry"的位置</p>
+
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>接著我們必須將a跟b update，要這樣做是因為a儲存的是目前沒有任何carry的sum，而b代表的是carry，
+                            所以想法就是我們必須在把所有的carry做完之前不斷update a跟b的代表數字，如果今天carry沒了，代表a就是最終答案，所以就回傳它
+                        </p>
+                        
+                        <h2 class="section-heading">觀念記錄</h2>
+                        <h4 class="section-heading">Bitwise Operators</h4>
+                        <p> Bitwise operators: Compare each bit of two numbers. <br>
+                            Typical bitwise operators are and(&), or(|), xor(^), not(~), 
+                            left shift(&lt;&lt;), right shift(>>).
+                        </p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <pre><code class="language-cpp">
+int getSum(int a, int b) {
+    while(b!=0){
+        int sum = a ^ b;
+        int carry = (a & b) &lt;&lt; 1;
+        a = sum;
+        b = carry;
+    }
+    return a;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <img src="./assets/submission/Q371.jpg" alt="Q371 submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
