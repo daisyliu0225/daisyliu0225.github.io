@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q55 -- Jump Game</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 8, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>You are given an integer array nums. 
+                            You are initially positioned at the array's first index, 
+                            and each element in the array represents your maximum jump length at that position.
+                        </p>
+                        <p>Return true if you can reach the last index, or false otherwise.</p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    1 &lt; = nums.length &lt; = 10^4
+                                </li>
+                                <li>
+                                    0 &lt;= nums[i] &lt;= 10^5
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題我有寫出一個solution然後過了，但效率太低，所以記錄自己的方法跟別人的方法</p>
+                        <h3 class="section-heading">Solution 1(自己的)</h3>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>作法是這樣，首先我思考要怎樣才可以到達最後一步，
+                            那就要知道前面有沒有人有辦法可以走到，所以我決定使用DP</p>
+                        <p>作法就是把前面每一個可能性算出來，後面再一個一個check有沒有機會就好了</p>
+                        <p>然後我發現加了break之後的效率是原先的2倍，但還是偏低</p>
+                        <p>時間複雜度是O(n^2) QQ</p>
+
+                        <h3 class="section-heading">Solution 2(別人的)</h3>
+                        <p>這是別人的作法</p>
+                        <p>作法是這樣：今天我先設定一個變數叫maxReach，代表的是我從我現在這一格可以跑到多遠的位置</p>
+                        <p>然後在走每一格的時候更新maxReach的數字。更新的狀況是如果今天我目前走的這一格可以走到比maxReach更遠的位置上的話，
+                            那就更新maxReach。如果沒有更遠，maxReach就維持</p>
+                        <p>一直走直到for loop走到最後一格為止，在最後我們檢查maxReach是否比最後一格大，或跟最後一格相同，如果是的話，回傳true，否則回傳false</p>
+                        <p>時間複雜度是O(n)</p>
+
+                        <h2 class="section-heading">Whole code</h2>
+                        <h3 class="section-heading">Solution 1(自己的)</h3>
+                        <pre><code class="language-cpp">
+bool canJump(vector<int>& nums) {
+    int dest = nums.size()-1;
+    bool reachable[10000] = {false};
+    reachable[0] = true;
+    for(int i=1;i&lt;nums.size();i++){
+        for(int j=0;j&lt;i;j++){
+            if(reachable[j] == true && nums[j] + j >= i) {
+                reachable[i] = true;
+                break;
+            }
+        }
+    }
+    return reachable[dest];
+}
+                        </code></pre>
+                        <h3 class="section-heading">Solution 2(別人的)</h3>
+                        <pre><code class="language-cpp">
+bool canJump(vector<int>& nums) {
+    int maxReach = 0;
+    for(int i=0;i&lt;nums.size();i++){
+        if(i>maxReach) return false;
+        maxReach = max(maxReach, nums[i] + i);
+        if(maxReach >= nums.size() - 1) return true;
+    }
+    return false;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <h4 class="section-heading">Solution 1</h4>
+                        <img src="./assets/submission/Q55_mine.jpg" alt="Q55 my submission" style="max-width: 100%; height: auto;">
+                        <h4 class="section-heading">Solution 2</h4>
+                        <img src="./assets/submission/Q55_others.jpg" alt="Q55 others submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
