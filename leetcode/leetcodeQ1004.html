@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('../assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q1004 -- Max Consecutive Ones 3</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 18, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>Given a binary array nums and an integer k, 
+                            return the maximum number of consecutive 1's in the array if you can flip at most k 0's.</p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    1 &lt;= nums.length &lt;= 10^5
+                                </li>
+                                <li>
+                                    nums[i] is either 0 or 1.
+                                </li>
+                                <li>
+                                    0 &lt;= k &lt;= nums.length
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題的做法是利用sliding window</p>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>首先設置幾個變數：left，代表sliding window的開始、right，代表sliding window的結束、
+                            maxLen，代表目前所記錄的最大值、zeroCount，代表現在sliding window裡面框起來有多少個0。</p>
+                        
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>接著利用一個while loop處理，終止條件是right大於nums的size。</p>
+                        <p>如果right掃到的值是0的話，那zeroCount就加一。</p>
+                        <p>如果zeroCount已經比k值要大的話，left就一直往前，直到0的值比k小</p>
+                        <p>最後再檢查left到right的長度是不是比maxLen大，如果是的話，更新maxLen</p>
+
+                        <h4 class="section-heading">Step 3</h4>
+                        <p>最後，回傳maxLen即可</p>
+
+                        <h2 class="section-heading">一些紀錄</h2>
+                        <p>在用sliding window的時候必須要知道題目所focus在的地方在哪裡，
+                            像這一題它主要focus在0的上面，所以sliding window的處理會著重在0上面</p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <h3 class="section-heading">Solution</h3>
+                        <pre><code class="language-cpp">
+int longestOnes(vector<int>& nums, int k) {
+    int left = 0, right = 0;
+    int zero_count = 0, max_len = 0;
+
+    while (right &lt; nums.size()) {
+        if (nums[right] == 0) 
+            zero_count++;
+
+        // If zero count exceeds k, move left pointer
+        while (zero_count > k) {
+            if (nums[left] == 0) 
+                zero_count--;
+            left++; // Shrink the window
+        }
+
+        max_len = max(max_len, right - left + 1); // Update max length
+        right++; // Expand the window
+    }
+
+    return max_len;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <h4 class="section-heading">Solution</h4>
+                        <img src="../assets/submission/Q1004.jpg" alt="Q55 my submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
