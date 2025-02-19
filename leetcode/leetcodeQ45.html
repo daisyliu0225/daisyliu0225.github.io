@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('../assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q45 -- Jump Game 2</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 19, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0].</p>
+                        <p>Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at nums[i], you can jump to any nums[i + j] where:
+                            <ol>
+                                <li>
+                                    0 &lt;= j &lt;= nums[i] and
+                                </li>
+                                <li>
+                                    i + j &lt; n
+                                </li>
+                            </ol>
+                            Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].
+                        </p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    1 &lt;= nums.length &lt;= 10^4
+                                </li>
+                                <li>
+                                    0 &lt;= nums[i] &lt;= 1000
+                                </li>
+                                <li>
+                                    It's guaranteed that you can reach nums[n - 1].
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題的做法用DP</p>
+                        <h2 class="section-heading">Solution 1</h2>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>我的想法是先設定一個array，裡面先全部initialize成-1</p>
+                        <p>接著我掃過前面的所有element，看裡面哪一個最小，最後再回傳最小值</p>
+                        <p>時間複雜度是O(n^2)</p>
+
+                        <h2 class="section-heading">Solution 2</h2>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>作法也是利用DP，但它設定三個變數叫farthest。這三個變數分別是farthest、currentEnd跟jumps。</p>
+                        <p>farthest代表現在它可以走到什麼地方，currentEnd代表的是現在在這個位置可以走最遠到哪邊，需要這個變數是因為它需要依此紀錄jumps</p>
+
+                        <h4 class="section-heading">Step 2</h4>
+                        <p>接著我們從0 loop 到 sz-1，每次loop我們都更新farthest並確認現在是否已經走到currentEnd，如果已經走到currentEnd，那jumps就要加一</p>
+                        <p>最後return jumps</p>
+
+                        <h2 class="section-heading">一些紀錄</h2>
+                        <p>原來initialize的時候打：arr[i] = {-1}，只會initialize到第一個而已</p>
+                        <h2 class="section-heading">Whole code</h2>
+                        <h3 class="section-heading">Solution 1</h3>
+                        <pre><code class="language-cpp">
+int jump(vector<int>& nums) {
+    int minJumps[10000] = {-1};
+    fill_n(minJumps, 10000, -1);
+    int sz = nums.size();
+    minJumps[0] = 0;
+    for(int i=1;i &lt; sz;i++){
+        for(int j=0;j &lt; i;j++){
+            if(j + nums[j] >= i){
+                if(minJumps[i] == -1) minJumps[i] = minJumps[j] + 1;
+                else minJumps[i] = min(minJumps[i], minJumps[j]+1);
+            }
+        }
+    }
+    return minJumps[sz-1];
+}
+                        </code></pre>
+                        <h3 class="section-heading">Solution 2</h3>
+                        <pre><code class="language-cpp">
+int jump(vector<int>& nums) {
+    int n = nums.size();
+    if (n &lt;= 1) return 0;
+
+    int jumps = 0, farthest = 0, currentEnd = 0;
+
+    for (int i = 0; i &lt; n - 1; i++) {
+        farthest = max(farthest, i + nums[i]);
+        if (i == currentEnd) {
+            jumps++;
+            currentEnd = farthest;
+            if (currentEnd >= n - 1) break;
+        }
+    }
+    return jumps;
+}
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <h4 class="section-heading">Solution 1</h4>
+                        <img src="../assets/submission/Q45_mine.jpg" alt="Q45 my submission" style="max-width: 100%; height: auto;">
+                        <h4 class="section-heading">Solution 2</h4>
+                        <img src="../assets/submission/Q45_others.jpg" alt="Q45 others submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
