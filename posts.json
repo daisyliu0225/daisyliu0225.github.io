@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q122 --  Best Time to Buy and Sell Stock 2",
+        "link": "./leetcode/leetcodeQ122.html",
+        "date": "February 20, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q45 -- Jump Game 2",
         "link": "./leetcode/leetcodeQ45.html",
         "date": "February 19, 2025",

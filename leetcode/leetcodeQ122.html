@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog by daisyliu0225</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+        <!--For script-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../index.html">Daisy's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../post_main.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('../assets/img/code-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Leetcode解題筆記</h1>
+                            <h2 class="subheading">Q122 -- Best Time to Buy and Sell Stock 2</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">daisyliu0225</a>
+                                on February 20, 2025
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">題目敘述</h2>
+                        <p>You are given an integer array prices where prices[i] is the price of a given stock on the ith day.<br>
+
+                        <p> On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. 
+                            However, you can buy it then immediately sell it on the same day.</p>
+                            
+                        <p>Find and return the maximum profit you can achieve.</p>
+                        <p>Constraints:
+                            <ol>
+                                <li>
+                                    1 &lt;= prices.length &lt;= 3*10^4
+                                </li>
+                                <li>
+                                    0 &lt;= prices[i] &lt;= 10000
+                                </li>
+                            </ol>
+                        </p>
+                        <p>難度標記：<span style="color: rgb(255, 179, 0);">medium</span></p>
+                        <h2 class="section-heading">Tags</h2>
+                        <p>Array、DP、Greedy</p>
+
+                        <h2 class="section-heading">解題思路</h2>
+                        <p>這一題的做法用Greedy</p>
+                        <h2 class="section-heading">Solution 1</h2>
+                        <h4 class="section-heading">Step 1</h4>
+                        <p>想法就是Go Greedy！我先算兩個相減的值，然後再掃過所有相減的值的大小，只要看到相減的值的大小是大於0的話，那就加到profit裡面。</p>
+                        <p>最後回傳profit就好了</p>
+                        <p>Time complexity是O(n)，space complexity是O(n)(因為有多開一個delta矩陣)</p>
+
+                        <h2 class="section-heading">Solution 2</h2>
+                        <p>想法跟solution 1相同，但不用delta矩陣，而是直接在掃的過程中相減</p>
+                        <p>Time complexity是O(n)，space complexity是O(1)(因為沒有再多開)</p>
+
+                        <h2 class="section-heading">Whole code</h2>
+                        <h3 class="section-heading">Solution 1</h3>
+                        <pre><code class="language-cpp">
+int maxProfit(vector<int>& prices) {
+    int delta[30000];
+    int profit = 0;
+    for(int i=1;i&lt;prices.size();i++){
+        delta[i-1] = prices[i] - prices[i-1];
+    }
+    for(int i=0;i&lt;prices.size()-1;i++){
+        if(delta[i] > 0) profit = profit + delta[i];
+    }
+    return profit;
+}
+                        </code></pre>
+                        <h3 class="section-heading">Solution 2</h3>
+                        <pre><code class="language-cpp">
+int maxProfit(vector<int>& prices) {
+    int profit = 0;
+    for(int i = 1; i &lt; prices.size(); i++) {
+        if (prices[i] > prices[i - 1]) {
+            profit += prices[i] - prices[i - 1];
+        }
+    }
+    return profit;
+}                            
+                        </code></pre>
+                        <h2 class="section-heading">Submit result</h2>
+                        <h4 class="section-heading">Solution 1</h4>
+                        <img src="../assets/submission/Q122_mine.jpg" alt="Q122 my submission" style="max-width: 100%; height: auto;">
+                        <h4 class="section-heading">Solution 2</h4>
+                        <img src="../assets/submission/Q122_optimal.jpg" alt="Q122 optimal submission" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/daisyliu0225">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; daisyliu0225 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
