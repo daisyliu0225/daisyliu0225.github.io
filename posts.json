@@ -1,6 +1,13 @@
 [
     {
         "title": "Leetcode解題筆記",
+        "subtitle": "Q735 --Asteroid Collision",
+        "link": "./leetcode/leetcodeQ735.html",
+        "date": "February 25, 2025",
+        "author": "daisyliu0225"
+    },
+    {
+        "title": "Leetcode解題筆記",
         "subtitle": "Q122 --  Best Time to Buy and Sell Stock 2",
         "link": "./leetcode/leetcodeQ122.html",
         "date": "February 20, 2025",
